@@ -1,5 +1,6 @@
 
-mypath='pRF_somato_data/data/';
+mypath='/Volumes/nemosine/prfsomato_fits';
+%mypath = '/Users/lpzds1/Library/CloudStorage/OneDrive-SharedLibraries-TheUniversityofNottingham/Michael_Sue - pRF_paper_draft/prfsomato_fits';
 
 % range of data
 % SUBJECTS
@@ -163,7 +164,7 @@ end
 % 1 4x4 struct for the BAA based on the ROI loading
 % 1 4x4 struct for the PD based on how I did some mixing on PD values
 % above.
-thisModel = 4;
+thisModel = 3;
 doBa = 1;
 doBasetips = 0;
 if doBa == 1
@@ -291,15 +292,19 @@ for iSub = 1:nsubs
             myBestTC.MLI{iSub}{iLoc,iDigit} = matchingLinearIdx;
             
             if thisModel == 1 %2D Gaussian
-                thisrf = model_2d_gauss(extractedParams(:, matchingLinearIdx) ,stims, nSteps, 1); % extra flag for 1 = smooth
+                [thisrf,B] = model_2d_gauss(extractedParams(:, matchingLinearIdx) ,stims, nSteps, 1); % extra flag for 1 = smooth
+
             elseif thisModel == 2 %1D
-                thisrf = model_1d_gauss(extractedParams(:, matchingLinearIdx) ,stims, nSteps+1, 0,1);
+                [thisrf,B] = model_1d_gauss(extractedParams(:, matchingLinearIdx) ,stims, nSteps+1, 0,1);
             elseif thisModel == 3 %1D T
-                thisrf = model_1d_gauss(extractedParams(:, matchingLinearIdx) ,stims, nSteps+1, 1,1); % extra flag for transpose
+                [thisrf,B] = model_1d_gauss(extractedParams(:, matchingLinearIdx) ,stims, nSteps+1, 1,1); % extra flag for transpose
             elseif thisModel == 4 % Uncon
                 thisrf = model_uncon(extractedParams(:, matchingLinearIdx) ,stims, nSteps, 1);% extra flag for 1 = smooth
             end
-            
+
+            ogcopyrf = thisrf;
+            thisrf = B;
+
             if doPCA == 1
                 
                 X = reshape(thisrf, [size(thisrf,1).*size(thisrf,1) size(thisrf,3)]);
@@ -402,18 +407,18 @@ end
 
 
 if doMean == 1
-    savefile = ['/Volumes/nemosine/prfsomato_fits/' currentModel sep '_myMEAN.mat'];
+    savefile = ['/Volumes/nemosine/prfsomato_fits/' currentModel sep '_myMEAN_big.mat'];
     save(savefile,'myGRANDmean');
     
 elseif doPCA == 1
-    savefile = ['/Volumes/nemosine/prfsomato_fits/' currentModel sep '_myPCA.mat'];
+    savefile = ['/Volumes/nemosine/prfsomato_fits/' currentModel sep '_myPCA_big.mat'];
     save(savefile,'myGRANDpca');
 end
-savefile2 = ['/Volumes/nemosine/prfsomato_fits/' currentModel sep '_myRFs.mat'];
+savefile2 = ['/Volumes/nemosine/prfsomato_fits/' currentModel sep '_myRFs_big.mat'];
 save(savefile2,'myRF');
 
-savefile2 = ['/Volumes/nemosine/prfsomato_fits/' currentModel sep '_myBestTC.mat'];
-save(savefile2,'myBestTC');
+% savefile2 = ['/Volumes/nemosine/prfsomato_fits/' currentModel sep '_myBestTC.mat'];
+% save(savefile2,'myBestTC');
 
 
 

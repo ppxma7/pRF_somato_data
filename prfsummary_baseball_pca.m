@@ -1,5 +1,6 @@
 
-mypath='pRF_somato_data/data/';
+mypath='/Volumes/nemosine/prfsomato_fits';
+%mypath = '/Users/lpzds1/Library/CloudStorage/OneDrive-SharedLibraries-TheUniversityofNottingham/Michael_Sue - pRF_paper_draft/prfsomato_fits';
 
 % range of data
 % SUBJECTS
@@ -163,7 +164,7 @@ end
 % 1 4x4 struct for the BAA based on the ROI loading
 % 1 4x4 struct for the PD based on how I did some mixing on PD values
 % above.
-thisModel = 4;
+thisModel = 2;
 doBa = 1;
 doBasetips = 0;
 if doBa == 1
@@ -175,8 +176,8 @@ end
 
 aa = 2; %axis limits
 
-doPCA = 0;
-doMean = 1;
+doPCA = 1;
+doMean = 0;
 
 
 
@@ -279,11 +280,18 @@ for iSub = 1:nsubs
             % and plot these.
             
             if thisModel == 1 %2D Gaussian
-                thisrf = model_2d_gauss(extractedParams(:, matchingLinearIdx) ,stims, nSteps, 1); % extra flag for 1 = smooth
+                [thisrf,B] = model_2d_gauss(extractedParams(:, matchingLinearIdx) ,stims, nSteps, 1); % extra flag for 1 = smooth
+                
+                ogcopyrf = thisrf;
+                %thisrf = B; % comment this if you don't want the extrapolated RF 60x60
             elseif thisModel == 2 %1D
-                thisrf = model_1d_gauss(extractedParams(:, matchingLinearIdx) ,stims, nSteps+1, 0, 1);
+                [thisrf,B] = model_1d_gauss(extractedParams(:, matchingLinearIdx) ,stims, nSteps+1, 0, 1);
+                ogcopyrf = thisrf;
+                thisrf = B;
             elseif thisModel == 3 %1D T
-                thisrf = model_1d_gauss(extractedParams(:, matchingLinearIdx) ,stims, nSteps+1, 1, 1); % extra flag for transpose
+                [thisrf,B] = model_1d_gauss(extractedParams(:, matchingLinearIdx) ,stims, nSteps+1, 1, 1); % extra flag for transpose
+                ogcopyrf = thisrf;
+                thisrf = B;
             elseif thisModel == 4 % Uncon
                 thisrf = model_uncon(extractedParams(:, matchingLinearIdx) ,stims, nSteps, 1);% extra flag for 1 = smooth
             end

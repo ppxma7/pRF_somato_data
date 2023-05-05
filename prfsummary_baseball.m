@@ -27,7 +27,8 @@ mycmap = [thisorange; thisyellow; thisgreen; thisblue];
 mycmap2 = [thisorange; thisyellow; thisgreen; thisblue; thislblue; thisred; thispurple];
 
 
-mypath='pRF_somato_data/data/';
+mypath='/Volumes/nemosine/prfsomato_fits';
+%mypath = '/Users/lpzds1/Library/CloudStorage/OneDrive-SharedLibraries-TheUniversityofNottingham/Michael_Sue - pRF_paper_draft/prfsomato_fits';
 
 % range of data
 % SUBJECTS
@@ -39,7 +40,7 @@ mysubs = {'prf1','prf2','prf3','prf4','prf6','prf7','prf8','prf10'};
 nsubs = 8;
 %howmanyrows = 4;
 
-thisModel = 1;
+thisModel = 2;
 doBa = 1;
 doBasetips = 0;
 
@@ -640,11 +641,11 @@ if thisModel == 1 || thisModel == 2 || thisModel == 3
     
     g.set_color_options('map',[0.5 0.5 0.5])
     g.draw()
-    filename = sprintf(['explode_' sep '_' datafilenames{thisModel} '.pdf'],'%s%s');
-%     g.export('file_name',filename, ...
-%         'export_path',...
-%         '',...
-%         'file_type','pdf')
+    filename = sprintf(['michael_explode_' sep '_' datafilenames{thisModel} '.pdf'],'%s%s');
+    g.export('file_name',filename, ...
+        'export_path',...
+        '/Users/ppzma/The University of Nottingham/Michael_Sue - pRF/pRF_2021/',...
+        'file_type','pdf')
     
     
     
@@ -704,11 +705,11 @@ else
     g.set_order_options('x',0)
     g.set_color_options('map',mycmap)
     g.draw
-    filename = sprintf(['explode_' sep '_' datafilenames{thisModel} '.pdf'],'%s%s');
-%     g.export('file_name',filename, ...
-%         'export_path',...
-%         '',...
-%         'file_type','pdf')
+    filename = sprintf(['michael_explode_' sep '_' datafilenames{thisModel} '.pdf'],'%s%s');
+    g.export('file_name',filename, ...
+        'export_path',...
+        '/Users/ppzma/The University of Nottingham/Michael_Sue - pRF/pRF_2021/',...
+        'file_type','pdf')
     
     
     
@@ -794,10 +795,10 @@ if thisModel == 1 || thisModel == 2 || thisModel == 3
     g.draw
     
     filename = sprintf(['wang_explode_' sep '_' datafilenames{thisModel} '.pdf'],'%s%s');
-%     g.export('file_name',filename, ...
-%         'export_path',...
-%         '',...
-%         'file_type','pdf')
+    g.export('file_name',filename, ...
+        'export_path',...
+        '/Users/ppzma/The University of Nottingham/Michael_Sue - pRF/pRF_2021/',...
+        'file_type','pdf')
     
     % wang plot
     if doBa == 1
@@ -843,8 +844,9 @@ if thisModel == 1 || thisModel == 2 || thisModel == 3
     ylabel('Within Digit Direction')
     %legend
     
-    filename = sprintf(['_' sep '_' datafilenames{thisModel} '.pdf'],'%s%s');
-    %print('-dpdf', filename)
+    filename = sprintf(['/Users/ppzma/The University of Nottingham/Michael_Sue - pRF/pRF_2021/wang_' sep '_' datafilenames{thisModel} '.pdf'],'%s%s');
+    %filename = sprintf(['/Users/ppzma/The University of Nottingham/Michael_Sue - pRF/pRF_2021/wang_' sep '_' datafilenames{thisModel} '4ap6only.pdf'],'%s%s');
+    print('-dpdf', filename)
     
     [H,P,CI,STATS] = ttest2(DYstack, DXstack);
 
@@ -870,10 +872,10 @@ elseif thisModel == 4
     g.draw
     
     filename = sprintf(['wang_explode_' sep '_' datafilenames{thisModel} '.pdf'],'%s%s');
-%     g.export('file_name',filename, ...
-%         'export_path',...
-%         '',...
-%         'file_type','pdf')
+    g.export('file_name',filename, ...
+        'export_path',...
+        '/Users/ppzma/The University of Nottingham/Michael_Sue - pRF/pRF_2021/',...
+        'file_type','pdf')
     
     
     if doBa == 1
@@ -934,8 +936,9 @@ elseif thisModel == 4
     hold off
     ylabel('Moment of Inertia')
     %xlabel('PD')
-    filename = sprintf(['_' sep '_' datafilenames{thisModel} '.pdf'],'%s%s');
-    %print('-dpdf', filename)
+    filename = sprintf(['/Users/ppzma/The University of Nottingham/Michael_Sue - pRF/pRF_2021/wang_' sep '_' datafilenames{thisModel} '.pdf'],'%s%s');
+    %filename = sprintf(['/Users/ppzma/The University of Nottingham/Michael_Sue - pRF/pRF_2021/wang_' sep '_' datafilenames{thisModel} '4ap6only.pdf'],'%s%s');
+    print('-dpdf', filename)
     
 end
 
@@ -963,7 +966,7 @@ g.geom_line
 g.set_color_options('map',[0.5 0.5 0.5])
 g.draw
 
-%% now  plot
+%% now sue plot
 
 if strcmpi(sep,'BAA')
     whichSeparation = DIGDEX33; %BA
@@ -1042,10 +1045,10 @@ if thisModel == 1 || thisModel == 2
     
     g.draw
     filename = sprintf(['sue_compare_' sep '_' datafilenames{thisModel} '.pdf'],'%s%s');
-%     g.export('file_name',filename, ...
-%         'export_path',...
-%         '',...
-%         'file_type','pdf')
+    g.export('file_name',filename, ...
+        'export_path',...
+        '/Users/ppzma/The University of Nottingham/Michael_Sue - pRF/pRF_2021/',...
+        'file_type','pdf')
     
 else
     clear g
@@ -1087,12 +1090,12 @@ else
     g.no_legend()
     
     g.draw
-    filename = sprintf(['compare_' sep '_' datafilenames{thisModel} '.pdf'],'%s%s');
-%     g.export('file_name',filename, ...
-%         'export_path',...
-%         '',...
-%         'file_type','pdf')
-%     
+    filename = sprintf(['sue_compare_' sep '_' datafilenames{thisModel} '.pdf'],'%s%s');
+    g.export('file_name',filename, ...
+        'export_path',...
+        '/Users/ppzma/The University of Nottingham/Michael_Sue - pRF/pRF_2021/',...
+        'file_type','pdf')
+    
     
     
     
@@ -1126,7 +1129,10 @@ bawhich = DIGDEX33(129:end);
 %pdwhich = DIGDEX2;
 
 % stats
-[p,tbl,stats,terms] = anovan(bastack,{bawhich},'model','interaction','varnames',{'BA'});
+[p,tbl,stats,terms] = anovan(bastack,{bawhich},'model','linear','varnames',{'BA'});
+[resultsBA,~,~,gnamesBA] = multcompare(stats,"Dimension",[1 1]);
+
+
 [resultsBA,~,~,gnamesBA] = multcompare(stats,"Dimension",[1 1]);
 
 tblBA = array2table(resultsBA,"VariableNames", ...
@@ -1134,14 +1140,14 @@ tblBA = array2table(resultsBA,"VariableNames", ...
 tblBA.("Group A")=gnamesBA(tblBA.("Group A"));
 tblBA.("Group B")=gnamesBA(tblBA.("Group B"));
 
-%writecell(tbl,sprintf(['tbl_' sep '_' datafilenames{thisModel},'%s%s']),'FileType','spreadsheet')
-%writetable(tblBA,sprintf(['mult_' sep '_' datafilenames{thisModel},'%s%s']),'FileType','spreadsheet')
+writecell(tbl,sprintf(['tbl_' sep '_' datafilenames{thisModel},'%s%s']),'FileType','spreadsheet')
+writetable(tblBA,sprintf(['mult_' sep '_' datafilenames{thisModel},'%s%s']),'FileType','spreadsheet')
 
 
 
 
 % digits
-[p,tbl,stats,terms] = anovan(digstack,{DIGDEXbloop},'model','interaction','varnames',{'Digit'});
+[p,tbl,stats,terms] = anovan(digstack,{DIGDEXbloop},'model','linear','varnames',{'Digit'});
 [resultsBA,~,~,gnamesBA] = multcompare(stats,"Dimension",[1 1]);
 
 tblBA = array2table(resultsBA,"VariableNames", ...
@@ -1149,8 +1155,8 @@ tblBA = array2table(resultsBA,"VariableNames", ...
 tblBA.("Group A")=gnamesBA(tblBA.("Group A"));
 tblBA.("Group B")=gnamesBA(tblBA.("Group B"));
 
-%writecell(tbl,sprintf(['digtbl_' sep '_' datafilenames{thisModel},'%s%s']),'FileType','spreadsheet')
-%writetable(tblBA,sprintf(['digmult_' sep '_' datafilenames{thisModel},'%s%s']),'FileType','spreadsheet')
+writecell(tbl,sprintf(['digtbl_' sep '_' datafilenames{thisModel},'%s%s']),'FileType','spreadsheet')
+writetable(tblBA,sprintf(['digmult_' sep '_' datafilenames{thisModel},'%s%s']),'FileType','spreadsheet')
 
 
 
